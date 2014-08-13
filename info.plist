@@ -84,11 +84,8 @@
 				<key>applescript</key>
 				<string>on alfred_script(q)
     
-    set theIndex to 1
-    set theId to 1
-    set theprocesId to 1
+  
 	set oldDelimiters to AppleScript's text item delimiters
-    
 	set AppleScript's text item delimiters to "\n"
 	set processwindow to every text item of q	
 	set AppleScript's text item delimiters to oldDelimiters
@@ -151,15 +148,14 @@ end alfred_script</string>
 				<string>on alfred_script(q)
 
     set oldDelimiters to AppleScript's text item delimiters
-	
-	set AppleScript's text item delimiters to "|#$#|"
+	set AppleScript's text item delimiters to "\n"
 	set processwindow to every text item of q	
 	set AppleScript's text item delimiters to oldDelimiters
 
     set theProcess to item 1 of processwindow
     set theWindow to item 2 of processwindow
 	
-	tell application "Alfred 2" to search "quit " &amp; theProcess
+	tell application theProcess to close window theWindow
 
 end alfred_script</string>
 				<key>cachescript</key>
