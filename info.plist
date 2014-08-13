@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.iwasam.chimming</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>40E9AEDD-117D-4CAA-BFE5-4352E880B780</key>
+		<array/>
+		<key>6DC9C938-539B-4C13-AECA-0727ADEED808</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>76CDB735-009F-40D3-B036-ECA6DDAACAA4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>76CDB735-009F-40D3-B036-ECA6DDAACAA4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>40E9AEDD-117D-4CAA-BFE5-4352E880B780</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9412C1EF-1812-457A-89FC-6B1F09AC10B9</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Quit app</string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Iwasam</string>
+	<key>description</key>
+	<string>Select from open applications</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>chimming</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>49</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>Space</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>6DC9C938-539B-4C13-AECA-0727ADEED808</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+    
+    set theIndex to 1
+    set theId to 1
+    set theprocesId to 1
+	set oldDelimiters to AppleScript's text item delimiters
+    
+	set AppleScript's text item delimiters to "\n"
+	set processwindow to every text item of q	
+	set AppleScript's text item delimiters to oldDelimiters
+
+    set theProcess to item 1 of processwindow
+    set theWindow to item 2 of processwindow
+		
+
+    tell application "System Events"     
+        tell process theProcess  
+          perform action "AXRaise" of window theWindow
+          set frontmost to true
+         end tell
+    end tell    
+	
+end alfred_script</string>
+				<key>cachescript</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>40E9AEDD-117D-4CAA-BFE5-4352E880B780</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>chimming</string>
+				<key>runningsubtext</key>
+				<string>Loading ..</string>
+				<key>script</key>
+				<string>python switchto.py "{query}"</string>
+				<key>subtext</key>
+				<string>Select from running applications</string>
+				<key>title</key>
+				<string>Select from Running Applications</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>76CDB735-009F-40D3-B036-ECA6DDAACAA4</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+    set oldDelimiters to AppleScript's text item delimiters
+	
+	set AppleScript's text item delimiters to "|#$#|"
+	set processwindow to every text item of q	
+	set AppleScript's text item delimiters to oldDelimiters
+
+    set theProcess to item 1 of processwindow
+    set theWindow to item 2 of processwindow
+	
+	tell application "Alfred 2" to search "quit " &amp; theProcess
+
+end alfred_script</string>
+				<key>cachescript</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>9412C1EF-1812-457A-89FC-6B1F09AC10B9</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>40E9AEDD-117D-4CAA-BFE5-4352E880B780</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>6DC9C938-539B-4C13-AECA-0727ADEED808</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>76CDB735-009F-40D3-B036-ECA6DDAACAA4</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>9412C1EF-1812-457A-89FC-6B1F09AC10B9</key>
+		<dict>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
